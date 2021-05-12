@@ -2,7 +2,7 @@ import initializeListeners from './listeners.js'
 
 
 
-var routes = ['color', 'config']
+var routes = ['lights', 'config']
 var pages = {}
 
 
@@ -10,7 +10,7 @@ async function initialize() {
     for (var route of routes) {
         pages[`${route}`] = await fetchPage(`routes/${route}/${route}.html`)
     }
-    if (!location.hash) location.hash = "#color"
+    checkRoute()
     loadContent()
     window.addEventListener("hashchange", loadContent)
 }
@@ -20,10 +20,16 @@ async function fetchPage(page) {
 }
 
 function loadContent() {
+    checkRoute()
     var contentDiv = document.getElementById("content")
     var content = location.hash.substr(1)
     contentDiv.innerHTML = pages[content]
     initializeListeners[content]()
+}
+
+function checkRoute() {
+    var doesRouteExist = routes.filter(item => { return item == location.hash.slice(1) })
+    if (!location.hash || doesRouteExist.length == 0) location.hash = "#lights"
 }
 
 

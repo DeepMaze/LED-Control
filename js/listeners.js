@@ -1,26 +1,29 @@
-import database from '../js/database.js'
+import api from './api.js'
+import snackbar from "./snackbar.js";
 
 
 
 const routes = {
-    color: initializeColorListener,
+    lights: initializeLightsListener,
     config: initializeConfigListener,
 }
 
-function initializeColorListener() {
-    var saveColor = document.getElementById('saveColor');
-    var defaultColor = document.getElementById('defaultColor');
+function initializeLightsListener() {
+    var createLight = document.getElementById('createLight')
+    var saveColor = document.getElementById('saveColor')
+    var defaultColor = document.getElementById('defaultColor')
 
-    saveColor.onclick = database.saveColor
-    defaultColor.onclick = database.defaultColor
+    createLight.onclick = snackbar.createLight
+    saveColor.onclick = api.saveColor
+    defaultColor.onclick = api.defaultColor
 }
 
 function initializeConfigListener() {
-    var saveConfig = document.getElementById('saveConfig');
-    var defaultConfig = document.getElementById('defaultConfig');
+    var saveConfig = document.getElementById('saveConfig')
+    var defaultConfig = document.getElementById('defaultConfig')
 
-    saveConfig.onclick = database.saveConfig
-    defaultConfig.onclick = database.defaultConfig
+    saveConfig.onclick = api.saveConfig
+    defaultConfig.onclick = api.defaultConfig
 }
 
 export default routes
