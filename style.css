@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.navWrapper {
+    width: 100vw;
+    height: 10vh;
+    background-color: aquamarine;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navWrapper > a {
+    text-decoration: none;
+    font-size: 20pt;
+    outline: none;
+    color: black;
+    padding: 5px;
+    margin: 5px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.contentWrapper {
+    width: 100vw;
+    height: 90vh;
+    background-color: azure;
+    padding: 5px 10px;
+}
