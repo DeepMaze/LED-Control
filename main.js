@@ -1,12 +1,21 @@
-import api from './js/api.js'
-import routesListener from "./js/listeners.js"
-import router from './js/router.js'
+import Router from './js/router.js'
+import Api from './js/api.js'
+import Data from './js/data.js'
+import Listeners from "./js/listeners.js"
 
 
 
-routesListener['navigation'](router)
+function initialize() {
+    Listeners['navigation']()
+    Router.initialize()
+    Data.initialize()
 
-router.initialize()
+    setConfigData()
+    // await api.getLights()
+}
 
-await api.getInitializationData()
-await api.getLights()
+async function setConfigData() {
+
+}
+
+initialize()
