@@ -1,11 +1,20 @@
 import api from './api.js'
-import snackbar from "./snackbar.js";
-
+import snackbar from './snackbar.js'
+import router from './router.js'
 
 
 const routes = {
-    lights: initializeLightsListener,
-    config: initializeConfigListener,
+    "navigation": initializeNavigationListeners,
+    "lights": initializeLightsListener,
+    "config": initializeConfigListener,
+}
+
+function initializeNavigationListeners() {
+    var lightsNav = document.getElementById('lightsNav')
+    var configNav = document.getElementById('configNav')
+
+    lightsNav.addEventListener('click', () => router.navigate('/lights'))
+    configNav.addEventListener('click', () => router.navigate('/config'))
 }
 
 function initializeLightsListener() {

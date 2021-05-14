@@ -1,17 +1,21 @@
 {
-  "name": "led-control",
-  "version": "1.0.0",
-  "description": "A small website to regulate and configurate in-home led stripes that are controlled by a microcontroller with wifi.",
-  "main": "index.html",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "led",
-    "control",
-    "arduino",
-    "microcontroller"
-  ],
-  "author": "Adrian Rölleke",
-  "license": "ISC"
+    "name": "led-control",
+    "version": "1.0.0",
+    "description": "A small website to regulate and configurate in-home led stripes that are controlled by a microcontroller with wifi.",
+    "main": "index.html",
+    "scripts": {
+        "start": "node startServer.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "led",
+        "control",
+        "arduino",
+        "microcontroller"
+    ],
+    "author": "Adrian Rölleke",
+    "license": "ISC",
+    "dependencies": {
+        "live-server": "^1.2.1"
+    }
 }

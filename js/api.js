@@ -1,17 +1,17 @@
 const apiUrl = 'http://localhost:3000'
 
-function sendRequest(method, route, sendToken, payload) {
+function sendRequest(method, route, tokenOptions = { sendAccessToken }, payload) {
     return new Promise((resolve, reject) => {
         var url = `${apiUrl}${route}`
         var xhr = new XMLHttpRequest()
         xhr.open(method.toUpperCase(), url, true)
         xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
-        if (sendToken) xhr.setRequestHeader('Authorization', `Bearer ${localStorage.getItem('accessToken')}`)
+
+        if (tokenOptions.sendAccessToken) xhr.setRequestHeader('Authorization', `Bearer ${localStorage.getItem('accessToken')}`)
 
         xhr.addEventListener('load', (response) => resolve(response.currentTarget))
-        xhr.addEventListener('error', () => reject(this.error))
+        xhr.addEventListener('error', (error) => reject(error))
 
-        console.log('going to send: ', JSON.stringify(payload))
         xhr.send(JSON.stringify(payload))
     })
 }

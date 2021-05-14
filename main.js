@@ -1,11 +1,12 @@
-import router from './js/router.js'
 import api from './js/api.js'
+import routesListener from "./js/listeners.js"
+import router from './js/router.js'
 
 
-await router.initialize()
-// await api.getInitializationData()
-// await api.getLights()
 
-location.pathname += '/test'
+routesListener['navigation'](router)
 
-console.log(location.pathname)
+router.initialize()
+
+await api.getInitializationData()
+await api.getLights()
