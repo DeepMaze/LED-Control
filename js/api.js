@@ -1,5 +1,3 @@
-
-
 class Api {
     static _apiUrl = 'http://localhost:3000'
 
@@ -22,11 +20,15 @@ class Api {
     }
 
     static async getConfig() {
-        return await this._sendRequest('GET', '/config/getConfig', { sendAccessToken: false }, null)
+        return new Promise((resolve, reject) => {
+            this._sendRequest('GET', '/config/getConfig', { sendAccessToken: false }, null)
+                .then(result => resolve(result.response))
+                .catch(error => reject(error))
+        })
     }
 
     static async getLights() {
-        return await this._sendRequest('GET', '/light/getLights', { sendAccessToken: false }, null)
+        return this._sendRequest('GET', '/light/getLights', { sendAccessToken: false }, null)
     }
 
 

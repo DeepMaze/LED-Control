@@ -1,22 +1,28 @@
 import Listeners from './listeners.js'
-import routes from './routes.js'
 
 
 
 class Router {
-    static routerElement = document.querySelectorAll('[router-outlet]')[0]
+    static _routerElement = document.querySelectorAll('[router-outlet]')[0]
+    static _routes = {
+        '/': 'routes/lights/lights.html',
+        '/lights': 'routes/lights/lights.html',
+        '/config': 'routes/config/config.html'
+    }
 
     constructor() { }
 
     static async initialize() {
-        this.routerElement.innerHTML = await this.fetchPage(routes[window.location.pathname])
-        Listeners[window.location.pathname.slice(1)]()
+        this._routerElement.innerHTML = await this.fetchPage(this._routes[window.location.pathname])
+        if (window.location.pathname.slice(1).length > 0) Listeners[window.location.pathname.slice(1)]()
+        else Listeners['lights']()
     }
 
     static async navigate(pathName) {
         window.history.pushState({}, pathName, window.location.origin + pathName)
-        this.routerElement.innerHTML = await this.fetchPage(routes[pathName])
-        Listeners[pathName.slice(1)]()
+        this._routerElement.innerHTML = await this.fetchPage(this._routes[pathName])
+        if (pathName.slice(1).length > 0) Listeners[pathName.slice(1)]()
+        else Listeners['lights']()
     }
 
     static async fetchPage(page) {

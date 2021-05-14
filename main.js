@@ -5,17 +5,18 @@ import Listeners from "./js/listeners.js"
 
 
 
-function initialize() {
+async function initialize() {
     Listeners['navigation']()
-    Router.initialize()
+    await Router.initialize()
     Data.initialize()
+        .then(result => setConfigData())
+        .catch(error => console.error("[ERROR] ", error))
 
-    setConfigData()
-    // await api.getLights()
 }
 
 async function setConfigData() {
-
+    var config = Data.getConfig()
+    console.log(config)
 }
 
 initialize()
