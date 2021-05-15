@@ -1,4 +1,4 @@
-import Listeners from './listeners.js'
+import ContentInitializer from './contentInitializer.js'
 
 
 
@@ -14,15 +14,15 @@ class Router {
 
     static async initialize() {
         this._routerElement.innerHTML = await this.fetchPage(this._routes[window.location.pathname])
-        if (window.location.pathname.slice(1).length > 0) Listeners[window.location.pathname.slice(1)]()
-        else Listeners['lights']()
+        if (window.location.pathname.slice(1).length > 0) ContentInitializer[window.location.pathname.slice(1)]()
+        else ContentInitializer['lights']()
     }
 
     static async navigate(pathName) {
         window.history.pushState({}, pathName, window.location.origin + pathName)
         this._routerElement.innerHTML = await this.fetchPage(this._routes[pathName])
-        if (pathName.slice(1).length > 0) Listeners[pathName.slice(1)]()
-        else Listeners['lights']()
+        if (pathName.slice(1).length > 0) ContentInitializer[pathName.slice(1)]()
+        else ContentInitializer['lights']()
     }
 
     static async fetchPage(page) {

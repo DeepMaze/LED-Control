@@ -1,12 +1,19 @@
-function configItem(config) {
-    return `
-        <div class="item">
-            <fieldset>
-                <legend>${ config['Config_Key'] }</legend>
-                <input class="configValue" value="${ config['Config_Value'] }" placeholder="Wert">
-            </fieldset>
-        </div>
-    `
+class ConfigItem {
+
+    static createItem(item) {
+        return `
+            <div class="item" data-wrapper>
+                <input type="checkbox" class="value" id="${item['Key']}"${item['Value'] == 1 ? " checked" : ""} placeholder="Wert">
+                <label for="${item['Key']}">${item['Key']}</label>
+            </div>
+        `
+    }
+
+    static notAvailable() {
+        return `
+            There is no config
+        `
+    }
 }
 
-export default configItem
+export default ConfigItem

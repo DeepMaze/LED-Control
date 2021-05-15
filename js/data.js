@@ -19,7 +19,11 @@ class Data {
     }
 
     static getConfig() { return this._config }
-    static setConfig(config = {}) { this._config = config }
+    static setConfig(config = {}) {
+        this._config = config
+        Api.setConfig(this._config)
+            .catch(error => console.error(error))
+    }
 
     static async loadLights() {
         var lights = JSON.parse(await Api.getLights())
@@ -27,8 +31,12 @@ class Data {
         this._lights = lights
     }
 
-    static getLights() { return this.lights }
-    static setLights(lights = []) { this._lights = lights }
+    static getLights() { return this._lights }
+    static setLights(lights = []) {
+        this._lights = lights
+        Api.setLights(this._lights)
+            .catch(error => console.error(error))
+    }
 }
 
 

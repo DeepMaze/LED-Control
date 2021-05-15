@@ -27,25 +27,28 @@ class Api {
         })
     }
 
+    static async setConfig(config) {
+        return new Promise((resolve, reject) => {
+            this._sendRequest('POST', '/config/updateConfig', { sendAccessToken: false }, config)
+                .then(result => resolve(result.response))
+                .catch(error => reject(error))
+        })
+    }
+
     static async getLights() {
-        return this._sendRequest('GET', '/light/getLights', { sendAccessToken: false }, null)
+        return new Promise((resolve, reject) => {
+            this._sendRequest('GET', '/light/getLights', { sendAccessToken: false }, null)
+                .then(result => resolve(result.response))
+                .catch(error => reject(error))
+        })
     }
 
-
-    static saveColor() {
-        console.log('saveColor')
-    }
-
-    static defaultColor() {
-        console.log('defaultColor')
-    }
-
-    static saveConfig() {
-        console.log('saveConfig')
-    }
-
-    static defaultConfig() {
-        console.log('defaultConfig')
+    static async setLight(light) {
+        return new Promise((resolve, reject) => {
+            this._sendRequest('PUT', '/light/updateLight', { sendAccessToken: false }, light)
+                .then(result => resolve(result.response))
+                .catch(error => reject(error))
+        })
     }
 }
 
