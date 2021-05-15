@@ -45,29 +45,7 @@ class ContentInitializer {
 
     static async lights() {
         await Data.loadLights()
-        var saveLights = document.getElementById('saveLights')
-        var resetLights = document.getElementById('resetLights')
-
-        saveLights.onclick = this._saveLights
-        resetLights.onclick = this._resetLights
         this._resetLights()
-    }
-
-    static _saveLights() {
-        var lightItems = document.querySelectorAll('[data-wrapper]')
-        var lights = []
-        for (var item of lightItems) {
-            var light = {}
-            for (var child of item.children[0].children) {
-                if (child.classList[0] == 'key') light['Key'] = child.innerHTML
-                if (child.classList[0] == 'color') light['Color'] = child.value
-                if (child.classList[0] == 'luminosity') light['Luminosity'] = child.value
-            }
-            if (!light['Color']) light['Color'] = ''
-            if (!light['Luminosity']) light['Luminosity'] = 0
-            lights.push(light)
-        }
-        Data.setLights(lights)
     }
 
     static _saveLight(element) {
@@ -84,25 +62,21 @@ class ContentInitializer {
             .catch(error => console.error("[ERROR]: ", error))
     }
 
-    static _resetLights() {
+    static async _resetLights() {
         var content = document.querySelectorAll('[data-wrapper]')[0]
         content.innerHTML = ''
+        await Data.loadLights()
         var lights = Data.getLights()
         if (!lights) {
             content.innerHTML = LightsItem.notAvailable()
             return
         }
         for (var lightsItem of lights) content.innerHTML += LightsItem.createItem(lightsItem)
-        var colorInputs = [...document.getElementsByClassName('color')]
-        var luminosityInputs = [...document.getElementsByClassName('luminosity')]
 
-        for (var colorInput of colorInputs) {
-            colorInput.addEventListener('change', (event) => this._saveLight(event.target))
+        var inputs = [...document.getElementsByClassName('color'), ...document.getElementsByClassName('luminosity')]
+        for (var input of inputs) {
+            input.addEventListener('change', (event) => this._saveLight(event.target))
         }
-        for (var luminosityInput of luminosityInputs) {
-            luminosityInput.addEventListener('change', (event) => this._saveLight(event.target))
-        }
-
     }
 }
 
