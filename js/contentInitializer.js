@@ -11,19 +11,13 @@ class ContentInitializer {
     constructor() { }
 
     static navigation() {
-        var lightsNav = document.getElementById('lightsNav')
-        var configNav = document.getElementById('configNav')
-
-        lightsNav.addEventListener('click', () => Router.navigate('/lights'))
-        configNav.addEventListener('click', () => Router.navigate('/config'))
+        document.getElementById('lightsNav').addEventListener('click', () => Router.navigate('/lights'))
+        document.getElementById('configNav').addEventListener('click', () => Router.navigate('/config'))
     }
 
     static config() {
-        var saveConfig = document.getElementById('saveConfig')
-        var resetConfig = document.getElementById('resetConfig')
-
-        saveConfig.onclick = this._saveConfig
-        resetConfig.onclick = this._resetConfig
+        document.getElementById('saveConfig').addEventListener('click', () => { this._saveConfig() })
+        document.getElementById('resetConfig').addEventListener('click', () => { this._resetConfig() })
         this._resetConfig()
     }
 
@@ -37,14 +31,15 @@ class ContentInitializer {
 
     static _resetConfig() {
         var content = document.querySelectorAll('[data-wrapper]')[0]
-        content.innerHTML = ''
         var config = Data.getConfig()
+        content.innerHTML = ''
         if (config) for (var configItem of config) content.innerHTML += ConfigItem.createItem(configItem)
         else content.innerHTML = ConfigItem.notAvailable()
     }
 
     static async lights() {
         await Data.loadLights()
+        document.getElementById('createNew').addEventListener('click', () => { Router.navigate('/createLight') })
         this._resetLights()
     }
 
@@ -72,11 +67,27 @@ class ContentInitializer {
             return
         }
         for (var lightsItem of lights) content.innerHTML += LightsItem.createItem(lightsItem)
-
         var inputs = [...document.getElementsByClassName('color'), ...document.getElementsByClassName('luminosity')]
-        for (var input of inputs) {
-            input.addEventListener('change', (event) => this._saveLight(event.target))
-        }
+        for (var input of inputs) input.addEventListener('change', (event) => this._saveLight(event.target))
+    }
+
+    static async createLight() {
+        document.getElementById('createLight').addEventListener('click', () => { this._createLight() })
+        document.getElementById('cancel').addEventListener('click', () => { Router.navigate('/lights') })
+    }
+
+    static async _createLight() {
+        var key = document.getElementById('key')
+        var rgb = document.getElementById('rgb')
+        var dimmable = document.getElementById('dimmable')
+        Api.saveLight({ 'Key': key.value, 'RGB': rgb.checked, 'Dimmable': dimmable.checked, })
+            .then((result) => {
+                key.value = ''
+                rgb.checked = false
+                dimmable.checked = false
+                window.alert('Neues Licht wurde erstellt!')
+            })
+            .catch((error) => console.error(error))
     }
 }
 

@@ -1,0 +1,17 @@
+.content, .actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.actions > * {
+    margin: 0 20px 0 20px
+}
+
+.content > div {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}

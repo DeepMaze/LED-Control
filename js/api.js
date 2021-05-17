@@ -1,5 +1,5 @@
 class Api {
-    static _apiUrl = 'http://localhost:3000'
+    static _apiUrl = 'http://192.168.178.72:3000'
 
     constructor() { }
 
@@ -45,7 +45,15 @@ class Api {
 
     static async setLight(light) {
         return new Promise((resolve, reject) => {
-            this._sendRequest('PUT', '/light/updateLight', { sendAccessToken: false }, light)
+            this._sendRequest('PATCH', '/light/updateLight', { sendAccessToken: false }, light)
+                .then(result => resolve(result.response))
+                .catch(error => reject(error))
+        })
+    }
+
+    static async saveLight(light) {
+        return new Promise((resolve, reject) => {
+            this._sendRequest('PUT', '/light/createLight', { sendAccessToken: false }, light)
                 .then(result => resolve(result.response))
                 .catch(error => reject(error))
         })

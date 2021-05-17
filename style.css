@@ -16,10 +16,12 @@ button,
     text-align: center;
     color: black;
 
+    background-color: #97caca;
     border-radius: 3px;
     outline: none;
     border: none;
     box-shadow: none;
+    border-radius: 3px;
     transition: box-shadow 0.5s, background-color 0.5s, color 0.5s;
 }
 
@@ -32,12 +34,37 @@ button:hover,
     outline: none;
     transition: box-shadow 0.5s, background-color 0.5s, color 0.1s;
     cursor: pointer;
+    box-shadow: 0 0 10px #445c5c inset;
 }
 
 button.active,
 .button:hover {
     outline: none;
     transition: box-shadow 0.5s, background-color 0.5s, color 0.1s;
+}
+
+input[type="text"] {
+    height: 40px;
+    padding: 0 10px;
+    background: #97caca;
+    border: 1px solid #273535;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #273535 inset;
+    font-size: 20pt;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    box-shadow: 0 0 10px #273535 inset;
+}
+
+input[type="text"]:active {
+    outline: none;
+    box-shadow: 0 0 10px #273535 inset;
+}
+
+label {
+    font-size: 20pt;
 }
 
 .navWrapper {
@@ -60,4 +87,53 @@ button.active,
 
 .contentWrapper {
     padding: 5px 10px;
+}
+
+
+
+
+
+
+
+
+/* TEST */
+
+.checkboxWrapper {
+    margin: 10px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.checkboxControl {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 0.25em;
+    border: 2px solid #97caca;
+}
+
+svg {
+    transition: transform 0.2s;
+    transform: scale(0);
+}
+
+.checkbox {
+    display: flex;
+    position: relative;
+    margin: 0 5px 0 0;
+}
+
+input[type="checkbox"] {
+    opacity: 0;
+    width: 30px;
+    height: 30px;
+}
+
+/* input[type="checkbox"]:focus + .checkboxControl {
+    box-shadow: 0 0 0 0.05em #fff, 0 0 0.15em 0.1em currentColor;
+} */
+
+input[type="checkbox"]:checked + .checkboxControl svg {
+    transform: scale(0.9);
 }

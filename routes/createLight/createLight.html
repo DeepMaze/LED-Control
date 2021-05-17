@@ -1,0 +1,46 @@
+<head>
+    <link type="text/css" rel="stylesheet" href="./routes/createLight/createLight.css">
+</head>
+
+<body>
+    <h1>Neues Licht erstellen</h1>
+
+    <div class="content">
+        <div>
+            <input type="text" id="key" placeholder="Bezeichnung">
+        </div>
+        <div>
+            <label class="checkboxWrapper">
+                <span class="checkbox">
+                    <input type="checkbox" id="rgb">
+                    <span class="checkboxControl">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"
+                            focusable="false">
+                            <path fill="none" stroke="#273535" stroke-width="3" d="M1.73 12.91l6.37 6.37L22.79 4.59" />
+                        </svg>
+                    </span>
+                </span>
+                <span class="checkboxLabel">RGB fähig</span>
+            </label>
+        </div>
+        <div>
+            <label class="checkboxWrapper">
+                <span class="checkbox">
+                    <input type="checkbox" id="dimmable">
+                    <span class="checkboxControl">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"
+                            focusable="false">
+                            <path fill="none" stroke="#273535" stroke-width="3" d="M1.73 12.91l6.37 6.37L22.79 4.59" />
+                        </svg>
+                    </span>
+                </span>
+                <span class="checkboxLabel">Dimmbar</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button id="cancel">Abbrechen</button>
+        <button id="createLight">Licht erstellen</button>
+    </div>
+</body>

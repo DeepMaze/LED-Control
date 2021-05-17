@@ -7,7 +7,8 @@ class Router {
     static _routes = {
         '/': 'routes/lights/lights.html',
         '/lights': 'routes/lights/lights.html',
-        '/config': 'routes/config/config.html'
+        '/createLight': 'routes/createLight/createLight.html',
+        '/config': 'routes/config/config.html',
     }
 
     constructor() { }
