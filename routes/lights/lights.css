@@ -1,14 +1,25 @@
-.content {
+.content {}
+
+#createNew {
+    width: 100%;
 }
 
 .item {
-    margin: 5px 0;
+    margin: 10px 0;
     padding: 10px;
+
+    background-color: #6b8a8a;
+    border-radius: 10px;
 
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+}
+
+.colorWrapper {
+    border: 2px solid #273535;
+    border-radius: 5px;
 }
 
 .item > div {
@@ -26,13 +37,14 @@
 .item > div > input[type="color"] {
     border: none;
     padding: 0;
-    width: 90%;
     height: 50px;
     cursor: pointer;
+    opacity: 0;
 }
 
+.item > div > input[type="color"],
 .item > div > input[type="range"] {
-    width: 90%;
+    width: 100%;
 }
 
 input[type="range"] {

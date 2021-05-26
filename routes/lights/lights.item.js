@@ -2,20 +2,36 @@ class LightsItem {
 
     static createItem(item) {
         return `
-            <div class="item" data-wrapper>
+            <div class="item" data-wrapper key="${item['Key']}">
                 <div><span>${item['Key']}</span></div>
-                <div>
                 ${(item['RGB'] == 1)
-                    ? (`<input class="color ${item['Key']}" type="color" value="${item['Color']}">`)
-                    : ('')}
-                </div>
-                <div>
-                ${(item['Dimmable'] == 1)
-                    ? (`<input class="luminosity ${item['Key']}" type="range" min="0" max="1" step="0.1" value="${item['Luminosity']}">`)
-                    : (`<input class="luminosity ${item['Key']}" type="range" min="0" max="1" step="1" value="${item['Luminosity']}">`)}
-                </div>
+                ? (this._addColor(item))
+                : ('')}
+                ${this._addLuminosity(item)}
+                <button class="delete" key="${item['Key']}">Löschen</button>
             </div>
         `
+    }
+
+    static _addColor(item) {
+        return `
+            <div class="colorWrapper" style="background-color: ${item['Color']};">
+                <input class="color" type="color" value="${item['Color']}">
+            </div>`
+    }
+
+    static _addLuminosity(item) {
+        if (item['Dimmable'] == 1) {
+            return `
+                <div>
+                    <input class="luminosity" type="range" min="0" max="1" step="0.1" value="${item['Luminosity']}">
+                </div>`
+        } else {
+            return `
+                <div>
+                    <input class="luminosity" type="range" min="0" max="1" step="1" value="${item['Luminosity']}">
+                </div>`
+        }
     }
 
     static notAvailable() {

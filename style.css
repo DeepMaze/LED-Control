@@ -86,7 +86,9 @@ label {
 }
 
 .contentWrapper {
-    padding: 5px 10px;
+    padding: 1vh 2vw;
+    overflow: auto;
+    height: 88vh;
 }
 
 

@@ -19,7 +19,7 @@ class Api {
         })
     }
 
-    static async getConfig() {
+    static getConfig() {
         return new Promise((resolve, reject) => {
             this._sendRequest('GET', '/config/getConfig', { sendAccessToken: false }, null)
                 .then(result => resolve(result.response))
@@ -27,7 +27,7 @@ class Api {
         })
     }
 
-    static async setConfig(config) {
+    static setConfig(config) {
         return new Promise((resolve, reject) => {
             this._sendRequest('POST', '/config/updateConfig', { sendAccessToken: false }, config)
                 .then(result => resolve(result.response))
@@ -35,7 +35,7 @@ class Api {
         })
     }
 
-    static async getLights() {
+    static getLights() {
         return new Promise((resolve, reject) => {
             this._sendRequest('GET', '/light/getLights', { sendAccessToken: false }, null)
                 .then(result => resolve(result.response))
@@ -43,7 +43,7 @@ class Api {
         })
     }
 
-    static async setLight(light) {
+    static setLight(light) {
         return new Promise((resolve, reject) => {
             this._sendRequest('PATCH', '/light/updateLight', { sendAccessToken: false }, light)
                 .then(result => resolve(result.response))
@@ -51,9 +51,17 @@ class Api {
         })
     }
 
-    static async saveLight(light) {
+    static saveLight(light) {
         return new Promise((resolve, reject) => {
             this._sendRequest('PUT', '/light/createLight', { sendAccessToken: false }, light)
+                .then(result => resolve(result.response))
+                .catch(error => reject(error))
+        })
+    }
+
+    static deleteLight(lightKey) {
+        return new Promise((resolve, reject) => {
+            this._sendRequest('DELETE', '/light/deleteLight', { sendAccessToken: false }, { Key: lightKey })
                 .then(result => resolve(result.response))
                 .catch(error => reject(error))
         })

@@ -10,12 +10,11 @@ class Data {
 
     static async initialize() {
         await this.loadConfig()
+        await this.loadLights()
     }
 
     static async loadConfig() {
-        var config = JSON.parse(await Api.getConfig())
-        if (!config || config.length < 1) console.error('Config could not get loaded')
-        this._config = config
+        this._config = JSON.parse(await Api.getConfig())
     }
 
     static getConfig() { return this._config }
@@ -26,9 +25,7 @@ class Data {
     }
 
     static async loadLights() {
-        var lights = JSON.parse(await Api.getLights())
-        if (!lights || lights.length < 1) console.error('Config could not get loaded')
-        this._lights = lights
+        this._lights = JSON.parse(await Api.getLights())
     }
 
     static getLights() { return this._lights }
